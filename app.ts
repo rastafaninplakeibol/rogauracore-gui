@@ -14,7 +14,6 @@ app.on('ready', () => {
             nodeIntegration: true,
             contextIsolation: false
         },
-        icon: join(__dirname, '/ciak.png')
     });
     mainWin.setTitle('Rogauracore-gui')
     mainWin.loadFile(homePath);

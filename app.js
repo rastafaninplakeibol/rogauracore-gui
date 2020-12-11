@@ -8,14 +8,13 @@ var homePath = path_1.join(__dirname, 'home.html');
 app.on('ready', function () {
     mainWin = new electron.BrowserWindow({
         width: 500,
-        height: 700,
+        height: 300,
         frame: true,
         backgroundColor: '#222222',
         webPreferences: {
             nodeIntegration: true,
             contextIsolation: false
-        },
-        icon: path_1.join(__dirname, '/ciak.png')
+        }
     });
     mainWin.setTitle('Rogauracore-gui');
     mainWin.loadFile(homePath);
