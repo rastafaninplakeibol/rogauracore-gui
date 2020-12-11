@@ -8,7 +8,7 @@ var homePath = path_1.join(__dirname, 'home.html');
 app.on('ready', function () {
     mainWin = new electron.BrowserWindow({
         width: 500,
-        height: 300,
+        height: 900,
         frame: true,
         backgroundColor: '#222222',
         webPreferences: {

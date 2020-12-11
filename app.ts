@@ -7,7 +7,7 @@ const homePath = join(__dirname, 'home.html')
 app.on('ready', () => {
     mainWin = new electron.BrowserWindow({
         width: 500,
-        height: 300,
+        height: 900,
         frame: true,
         backgroundColor: '#222222',
         webPreferences: {
