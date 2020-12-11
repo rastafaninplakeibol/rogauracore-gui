@@ -1,0 +1,14 @@
+{
+  "name": "rogauracore-gui",
+  "version": "1.0.0",
+  "description": "gui for rogauracore",
+  "main": "app.js",
+  "scripts": {
+    "test": "tsc app.ts && electron ."
+  },
+  "author": "me",
+  "license": "ISC",
+  "dependencies": {
+    "electron": "^11.0.4"
+  }
+}

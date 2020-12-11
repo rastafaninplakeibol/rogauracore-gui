@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html style="width: 100%; height: 100%; overflow-x: hidden;">
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <style>
+
+        .centered {
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .container {        
+            display: flex;
+            align-items: center;
+        }
+
+    </style>
+</head>
+<body style="width: 100%; height: 90%;">
+    <div style="width: 100%; text-align: center; color: white"><h1>Single section</h1></div>
+    <div style="display: flex; align-items: center; text-align: center;">
+        <span class="centered">
+            <button onclick="selectSingleColor('#00ff00',1)" >Green</button>
+            <button onclick="selectSingleColor('#ff0000',1)" >Red</button>
+            <button onclick="selectSingleColor('#0000ff',1)" >Blue</button>
+            <button onclick="selectSingleColor('#ffffff',1)" >White</button>
+            <button onclick="selectSingleColor('#000000',1)" >Off</button>
+        </span>
+    </div>
+    <div style="color:white; width: 100%; text-align: center; margin-top: 0.5rem;">
+        <div>
+            <input id="singleBreathCheckbox" onchange="onSingleBreathingChange(this)" type="checkbox">Breathing</input>
+        </div>
+        <div>
+            <input id="singleCycleCheckbox" onchange="onSingleCycleChange(this)" type="checkbox">Colorcycle</input>
+        </div>
+        <div>
+            <input id="singleSpeed" value="1" style="width: 2rem; display: none;" type="number" min="1" max="3" step="1">
+        </div>
+    </div>
+
+    <div class="container" style="width: 100%;height: 25%;">
+        <div class="centered" style="display: flex;">
+            <input id="singleInputColor1" class="centered" type="color" onchange="selectSingleColor(this.value,1)" value="#123456">
+        </div>
+        <div id="showSingleColor1" style="height: 4rem; width: 10rem; background-color: #123456" class="centered"></div>
+        <div id="showSingleRGBColor1" class="centered" style="color: white;">#123456</div>
+    </div>
+    <div id="secondColor" class="container" style="width: 100%;height: 25%; display: none;">
+        <div class="centered" style="display: flex;">
+            <input id="singleInputColor2" class="centered" type="color" onchange="selectSingleColor(this.value,2)" value="#123456">
+        </div>
+        <div id="showSingleColor2" style="height: 4rem; width: 10rem; background-color: #123456" class="centered"></div>
+        <div id="showSingleRGBColor2" class="centered" style="color: white;">#123456</div>
+    </div>
+    <div class="container">
+        <div class="centered">
+            <button onclick="changeSingleKeyboardColor()">Confirm single color</button>
+        </div>
+    </div>
+
+    <div style="margin-top:1rem; height: 0.1rem; background-color: white; width: 100%;"></div>
+
+    <div style="width: 100%; text-align: center; margin-top: 1rem; color: white">
+        <h1>Multi section</h1>
+    </div>
+    <div style="color:white; width: 100%; text-align: center; margin-top: 0.5rem;">
+        <div>
+            <input id="multiBreathCheckbox" onchange="onMultiBreathingChange(this)" type="checkbox">Breathing</input>
+        </div>
+        <div>
+            <input id="multiSpeed" value="1" style="width: 2rem; display: none;" type="number" min="1" max="3" step="1">
+        </div>
+    </div>
+    <div class="container" style="width: 100%;height: 25%;">
+        <div style="width: 25%; text-align: center;">
+            <div class="centered" style="display: flex;">
+                <input id="multiInputColor1" class="centered" type="color" onchange="selectMultiColor(this.value,1)" value="#123456">
+            </div>
+            <div id="showMultiColor1" style="height: 2rem; width: 5rem; background-color: #123456" class="centered"></div>
+            <div id="showMultiRGBColor1" class="centered" style="color: white;">#123456</div>
+        </div>
+        <div style="width: 25%; text-align: center;">
+            <div class="centered" style="display: flex;">
+                <input id="multiInputColor2" class="centered" type="color" onchange="selectMultiColor(this.value,2)" value="#123456">
+            </div>
+            <div id="showMultiColor2" style="height: 2rem; width: 5rem; background-color: #123456" class="centered"></div>
+            <div id="showMultiRGBColor2" class="centered" style="color: white;">#123456</div>
+        </div>
+        <div style="width: 25%; text-align: center;">
+            <div class="centered" style="display: flex;">
+                <input id="multiInputColor3" class="centered" type="color" onchange="selectMultiColor(this.value,3)" value="#123456">
+            </div>
+            <div id="showMultiColor3" style="height: 2rem; width: 5rem; background-color: #123456" class="centered"></div>
+            <div id="showMultiRGBColor3" class="centered" style="color: white;">#123456</div>
+        </div>
+        <div style="width: 25%; text-align: center;">
+            <div class="centered" style="display: flex;">
+                <input id="multiInputColor4" class="centered" type="color" onchange="selectMultiColor(this.value,4)" value="#123456">
+            </div>
+            <div id="showMultiColor4" style="height: 2rem; width: 5rem; background-color: #123456" class="centered"></div>
+            <div id="showMultiRGBColor4" class="centered" style="color: white;">#123456</div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="centered">
+            <button onclick="changeMultiKeyboardColor()">Confirm multi color</button>
+        </div>
+    </div>
+    <div class="container" style="margin-top: 1rem;">
+        <div class="centered">
+            <button onclick="rainbowKeyboard()">RAINBOWWWW</button>
+        </div>
+    </div>
+</body>
+<script>
+    const { exec } = require("child_process");
+    const { join } = require("path")
+    const rogAuraCoreExecPath = join(__dirname, 'bin/rogauracore')
+    
+    function onSingleBreathingChange(elem) {
+        document.getElementById('singleSpeed').style.display = elem.checked ? 'inline' : 'none'
+        document.getElementById('secondColor').style.display = elem.checked ? 'flex' : 'none'
+    }
+    
+    function onSingleCycleChange(elem) {
+        document.getElementById('singleSpeed').style.display = elem.checked ? 'inline' : 'none'
+    }
+    
+    function onMultiBreathingChange(elem) {
+        document.getElementById('multiSpeed').style.display = elem.checked ? 'inline' : 'none'
+    }
+
+    function selectSingleColor(value, index) {
+        const input = document.getElementById(`singleInputColor${index}`)
+        const showSingleColor = document.getElementById(`showSingleColor${index}`)
+        const showSingleRGBColor = document.getElementById(`showSingleRGBColor${index}`)
+        showSingleColor.style.backgroundColor = value
+        showSingleRGBColor.innerText = value
+        input.value = value
+    }
+    
+    function selectMultiColor(value, index) {
+        const input = document.getElementById(`multiInputColor${index}`)
+        const elem = document.getElementById(`showMultiColor${index}`)
+        const elemRGB = document.getElementById(`showMultiRGBColor${index}`)
+        elem.style.backgroundColor = value
+        elemRGB.innerText = value
+        input.value = value
+    }
+    
+    function changeSingleKeyboardColor() {
+        const value1 = document.getElementById('singleInputColor1').value
+        const value2 = document.getElementById('singleInputColor2').value
+
+        const breathing = document.getElementById('singleBreathCheckbox').checked
+        const cycle = document.getElementById('singleCycleCheckbox').checked
+        const speed = document.getElementById('singleSpeed').value
+
+        console.log(value1)
+        console.log(value2)
+        console.log(breathing)
+        console.log(cycle)
+        console.log(speed)
+
+        if(cycle) {
+            exec(`pkexec ${rogAuraCoreExecPath} single_colorcycle ${speed}`, {}, (err, stdout, stderr) => {
+                console.log(stdout)
+                console.log(stderr)
+            }) 
+        }
+
+        else if(breathing) {
+            exec(`pkexec ${rogAuraCoreExecPath} single_breathing ${value1.substring(1)} ${value2.substring(1)} ${speed}`, {}, (err, stdout, stderr) => {
+                console.log(stdout)
+                console.log(stderr)
+            })
+        }
+        else {
+            exec(`pkexec ${rogAuraCoreExecPath} single_static ${value1.substring(1)}`, {}, (err, stdout, stderr) => {
+                console.log(stdout)
+                console.log(stderr)
+            })
+        }
+    }
+    
+    function changeMultiKeyboardColor() {
+        const value1 = document.getElementById(`multiInputColor1`).value
+        const value2 = document.getElementById(`multiInputColor2`).value
+        const value3 = document.getElementById(`multiInputColor3`).value
+        const value4 = document.getElementById(`multiInputColor4`).value
+
+        const breathing = document.getElementById('multiBreathCheckbox').checked
+        const speed = document.getElementById('multiSpeed').value
+
+
+        if(breathing) {
+            exec(`pkexec ${rogAuraCoreExecPath} multi_breathing ${value1.substring(1)} ${value2.substring(1)} ${value3.substring(1)} ${value4.substring(1)} ${speed}`, {}, (err, stdout, stderr) => {
+                console.log(stdout)
+                console.log(stderr)
+            })
+        }
+
+        else {
+            exec(`pkexec ${rogAuraCoreExecPath} multi_static ${value1.substring(1)} ${value2.substring(1)} ${value3.substring(1)} ${value4.substring(1)}`, {}, (err, stdout, stderr) => {
+                console.log(stdout)
+                console.log(stderr)
+            })
+        }
+    }
+
+    function rainbowKeyboard() {
+        exec(`pkexec ${rogAuraCoreExecPath} rainbow`, {}, (err, stdout, stderr) => {
+            console.log(stdout)
+            console.log(stderr)
+        })
+    }
+</script>
+</html>
