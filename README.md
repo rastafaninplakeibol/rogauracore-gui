@@ -14,6 +14,7 @@ original rogauracore tool can be found at https://github.com/wroberts/rogauracor
 YOU NEED TO BE A SUDOER OR RUN THE PROGRAM AS ROOT SINCE THE ROGAURACORE DRIVER NEEDS ROOT PERMISSIONS TO TALK TO YOUR KEYBOARD
 
 In order to use this application you need to install Node.js & NPM (https://nodejs.org/en/download/package-manager/) and Electron (https://www.electronjs.org/docs/latest/tutorial/quick-start). 
+
 Be sure to install electron GLOBALLY (`npm -g i electron`)
 
 After the installation is complete you just have to:
